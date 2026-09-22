@@ -1,3 +1,4 @@
+````dart
 void main() {
   String namaMatkul = 'Aplikasi Mobile';
   int sks = 3;
@@ -54,3 +55,4 @@ void main() {
   };
   print(biodataMahasiswa);
 }
+````
