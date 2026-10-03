@@ -9,15 +9,15 @@ void main() {
   // bool memberToko = false;
 
   // skenario 2
-  // int minimalBelanja = 150000;
+  // const MINIMAL_BELANJA = 150000;
   // bool memberToko = false;
 
   // skenario 3
-  const MINIMAL_BELANJA = 150000;
-  bool memberToko = true;
-  // Skenario 4
-  // int minimalBelanja = 300000;
+  // const MINIMAL_BELANJA = 150000;
   // bool memberToko = true;
+  // Skenario 4
+  const MINIMAL_BELANJA = 300000;
+  bool memberToko = false;
 
   final double discount = hitungPersenDiskon(MINIMAL_BELANJA, memberToko);
   final double totalBayar = hitungTotalBayar(MINIMAL_BELANJA, discount);
