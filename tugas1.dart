@@ -9,71 +9,120 @@ void main() {
   //  bool cp2 = true;
   //  bool cp3 = true;
   //  bool cp4 = true;
-  String urutanPerusahaan = 'CP1-CP2-CP3-CP4';
+  String urutanPerusahaan = 'CP1-CP3-CP3-CP4';
   String urutanPatroli = 'CP1-CP2-CP3-CP4';
+  // Skenario checkpoint
   Map<String, dynamic> checkPoint = {
-    'CP1': {'scan': true, 'waktu': 16},
-    'CP2': {'scan': true, 'waktu': 10},
-    'CP3': {'scan': true, 'waktu': 5},
-    'CP4': {'scan': true, 'waktu': 15},
+    'CP1': {'scan': false, 'waktu': 16, 'kondisi': 'Aman'},
+    'CP2': {'scan': false, 'waktu': 10, 'kondisi': 'mesin operator nyala'},
+    'CP3': {'scan': true, 'waktu': 5, 'kondisi': 'Aman'},
+    'CP4': {
+      'scan': true,
+      'waktu': 15,
+      'kondisi': 'pintu gerbang gudang tidak di kunci',
+    },
   };
-  cekCp(checkPoint, urutanPatroli, urutanPerusahaan);
-  final hasilCheckpoint = cekCp(checkPoint, urutanPatroli, urutanPerusahaan);
-  print(hasilCheckpoint);
+  const int BATAS_TERLAMBAT = 15;
+  cekCp(checkPoint, urutanPatroli, urutanPerusahaan, BATAS_TERLAMBAT);
 }
 
-cekCp(Map<String, dynamic> checkPoint, String urutanPatroli, urutanPerusahaan) {
+void cekCp(
+  Map<String, dynamic> checkPoint,
+  String urutanPatroli,
+  urutanPerusahaan,
+  BATAS_TERLAMBAT,
+) {
+  // BR-002: Setiap checkpoint harus sesuai ururtan
   if (urutanPatroli == urutanPerusahaan) {
-    print('urutan Benar');
+    print('Status Rute: Sesuai Urutan');
   } else {
-    print('urutan salah');
+    print('Status Rute: Tidak Sesuai Urutan');
   }
   //  cek CP1
+  // BR-001: Setiap checkpoint wajib discan
   if (checkPoint['CP1']['scan'] == true) {
-    print('sudah discan');
     int waktuCP1 = checkPoint['CP1']['waktu'];
-    if (waktuCP1 >= 15) {
-      print('Datang terlambat $waktuCP1');
+    String kondisi = checkPoint['CP1']['kondisi']; //BR-004 menetukan kondisi
+    // BR-003: Scan lebih dari 15 menit terlambat
+    int statusWaktu = 0;
+    if (waktuCP1 > BATAS_TERLAMBAT) {
+      statusWaktu:
+      'Terlambat (${waktuCP1 - BATAS_TERLAMBAT}menit)';
     } else {
-      print('Data sebelum waktu masuk $waktuCP1');
+      statusWaktu:
+      "Tepat waktu";
+    }
+    if (kondisi == 'Aman') {
+      print('Cp1\t: Discan | $statusWaktu | Kondisi: $kondisi');
+    } else {
+      print('cp1\t: Discan | $statusWaktu | Kondisi: PERINGATAN! $kondisi');
     }
   } else {
-    print('Tidak terscan');
+    print('Cp1\t: Tidak discan ');
   }
   // cek cp2
+
   if (checkPoint['CP2']['scan'] == true) {
-    print('sudah discan');
     int waktuCP2 = checkPoint['CP2']['waktu'];
-    if (waktuCP2 >= 15) {
-      print('Datang telambat $waktuCP2');
+    String kondisi = checkPoint['CP2']['kondisi'];
+    int statusWaktu = 0;
+    if (waktuCP2 > BATAS_TERLAMBAT) {
+      statusWaktu:
+      'Terlambat (${waktuCP2 - BATAS_TERLAMBAT}menit)';
     } else {
-      print('Datang sebelum waktu masuk $waktuCP2');
+      statusWaktu:
+      "Tepat waktu";
+      ;
+    }
+
+    if (kondisi == "Aman") {
+      print('Cp2\t: Discan | $statusWaktu | Kondisi: $kondisi');
+    } else {
+      print('cp2\t: Discan | $statusWaktu | Kondisi: PERINGATAN! $kondisi');
     }
   } else {
-    print('Tidak terscan');
+    print('Cp2\t: Tidak discan');
   }
   // cek cp3
   if (checkPoint['CP3']['scan'] == true) {
-    print('sudah discan');
     int waktuCP3 = checkPoint['CP3']['waktu'];
-    if (waktuCP3 >= 15) {
-      print('Datang Terlambat  $waktuCP3');
+    String kondisi = checkPoint['CP3']['kondisi'];
+    int statusWaktu = 0;
+    if (waktuCP3 > BATAS_TERLAMBAT) {
+      statusWaktu:
+      'Terlambat (${waktuCP3 - BATAS_TERLAMBAT}menit)';
     } else {
-      print('Datang Sebelum waktu masuk $waktuCP3');
+      statusWaktu:
+      "Tepat waktu";
+      ;
+    }
+    if (kondisi == 'Aman') {
+      print('Cp2\t: Discan | $statusWaktu | Kondisi: $kondisi');
+    } else {
+      print('cp2\t: Discan | $statusWaktu | Kondisi: PERINGATAN! $kondisi');
     }
   } else {
-    print('Tidak terscan');
+    print('Cp3\t: Tidak discan');
   }
   // cek cp4
   if (checkPoint['CP4']['scan'] == true) {
-    print('sudah discan');
-    int waktuCP4 = checkPoint['CP4']['waktu'];
-    if (waktuCP4 >= 15) {
-      print('Datang Terlambat $waktuCP4');
+    int waktuCP3 = checkPoint['CP4']['waktu'];
+    String kondisi = checkPoint['CP4']['kondisi'];
+    int statusWaktu = 0;
+    if (waktuCP3 > BATAS_TERLAMBAT) {
+      statusWaktu:
+      'Terlambat (${waktuCP3 - BATAS_TERLAMBAT}menit)';
     } else {
-      print('Datang sebelum waktu masuk $waktuCP4');
+      statusWaktu:
+      "Tepat waktu";
+      ;
+    }
+    if (kondisi == 'Aman') {
+      print('Cp2\t: Discan | $statusWaktu | Kondisi: $kondisi');
+    } else {
+      print('cp2\t: Discan | $statusWaktu | Kondisi: PERINGATAN! $kondisi');
     }
   } else {
-    print('Tidak terscan');
+    print('Cp3\t: Tidak discan');
   }
 }

@@ -1,5 +1,5 @@
 // ==================================================
-// Tugas Kelompok - Latihan 1
+// Tugas Kelompok - Latihan 1 (Kasir dengan Diskon)
 // Nama Anggota : 1. Maharani Kusuma Dewi (1124160211)
 //                2. Rinda Danar Madanti (1124160124)
 // ====================================================
@@ -25,12 +25,13 @@ void main() {
   print('Total Discount :$discount %');
   print('Total bayar: Rp$totalBayar');
 }
-
+// BR-001: Minimal belanja Rp100.000 mendapatkan diskon 10%
 hitungPersenDiskon(MINIMAL_BELANJA, bool memberToko) {
   double discount = 0;
   if (MINIMAL_BELANJA >= 100000) {
     discount = 10;
     if (memberToko) {
+      // BR-002: diskon akan di tambah apa bila pelanggan mempunyai MEMBER
       discount += 5;
     }
   }
@@ -39,6 +40,7 @@ hitungPersenDiskon(MINIMAL_BELANJA, bool memberToko) {
 
 hitungTotalBayar(MINIMAL_BELANJA, double discount) {
   double potongan = MINIMAL_BELANJA * discount / 100;
+  // BR-003: Maksimal potongan Rp25.000
   if (potongan > 25000) {
     potongan = 25000;
   }
